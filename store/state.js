@@ -5,4 +5,6 @@ export default () => ({
     reconnectError: false,
     reconnecting: false,
   },
+  locales: ['en', 'zh_TW', 'zh_CN'],
+  locale: 'zh_TW'
 })

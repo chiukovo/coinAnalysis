@@ -17,11 +17,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/css/main.scss'
   ],
-
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~plugins/websocket.js', ssr: false }
+    { src: '~plugins/websocket.js', ssr: false },
+    { src: '~plugins/i18n.js', ssr: false },
+    { src: '~plugins/global.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -33,6 +35,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    'nuxt-i18n'
   ],
   build: {
   }

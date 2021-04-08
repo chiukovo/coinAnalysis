@@ -1,6 +1,11 @@
 import Vue from 'vue'
 
 export default {
+  SET_LANG(state, locale) {
+    if (state.locales.indexOf(locale) !== -1) {
+      state.locale = locale
+    }
+  },
   SOCKET_ONOPEN(state, event) {
     Vue.prototype.$socket = event.currentTarget
     state.socket.isConnected = true
