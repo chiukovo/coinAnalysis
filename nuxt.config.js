@@ -22,7 +22,6 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~plugins/websocket.js', ssr: false },
-    { src: '~plugins/i18n.js', ssr: false },
     { src: '~plugins/global.js', ssr: false }
   ],
 
@@ -32,10 +31,36 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'nuxt-i18n'
+    '@nuxtjs/axios',
+    ['vue-currency-filter/nuxt', {
+      thousandsSeparator: ',',
+      symbolSpacing: false
+    }],
+    ['nuxt-i18n', {
+      locales: [
+        {
+          name: 'en',
+          code: 'en',
+          iso: 'en',
+          file: 'en.js'
+        },
+        {
+          name: 'zh_TW',
+          code: 'zh_TW',
+          iso: 'zh_TW',
+          file: 'zh_TW.js'
+        },
+        {
+          name: 'zh_CN',
+          code: 'zh_CN',
+          iso: 'zh_CN',
+          file: 'zh_CN.js'
+        },
+      ],
+      langDir: 'locales/',
+      defaultLocale: 'zh_TW',
+    }]
   ],
   build: {
   }
