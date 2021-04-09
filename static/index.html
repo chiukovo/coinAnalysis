@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+</head>
+<body class="bg-light">
+  <header class="py-3">
+    <nav class="navbar">
+      <div class="container px-4">
+        <div cldivss="navbar-brand">
+          LOGO
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="container pb-3">
+    <div class="bg-white shadow p-3 mb-5 bg-body rounded">
+      <div class="row" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative; height: 1044px;">
+        <div class="col-sm-6 col-lg-4 mb-4">
+          <div class="card market-ticker">
+            <div class="card-body">
+              <div class="card-title">
+                <div class="title-left">BTC/USD</div>
+                <small class="card-title-right"><div class="text-success">+1.18%</div></small>
+              </div>
+              <h4>$57,132.75</h4>
+              <ul class="market-ticker-24info">
+                <li><label>24小時最高</label><span>$55m449.27</span></li>
+                <li><label>24小時最低</label><span>$57,870.39</span></li>
+              </ul>
+              <div class="market-ticker-last">
+                <div class="time">16:39:10</div>
+                <div class="detail">特大單賣出</div>
+                <div class="number text-danger">21500 REN</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
