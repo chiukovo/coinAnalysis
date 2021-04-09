@@ -12,6 +12,9 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: '/js/reconnecting-websocket.min.js', type: 'text/javascript' },
     ]
   },
 

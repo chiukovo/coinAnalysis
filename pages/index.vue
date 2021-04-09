@@ -1,9 +1,9 @@
 <template>
   <div class="container">
+    <div style="width: 800px;margin: auto;">
+      <img src="~/assets/images/d.jpg" style="width: 800px;"/>
+    </div>
     <div>
-      <h1 class="title">
-        （ ´Д`）ﾉ弌弌弌弌弌弌弌弌弌弌⊃
-      </h1>
       <ul style="max-height: 500px;overflow-y: scroll;border: 1px solid;margin: 30px;">
         <li v-for="data in tradingNotice">
           <div>{{ data.name }}</div>
@@ -27,10 +27,46 @@ export default {
     }
   },
   mounted() {
+    const _this = this
 
+    this.$list.onopen = function(e) {
+      if (_this.$store.state.socket.reconnecting) {
+        _this.$store.state.socket.reconnecting = false
+        location.reload()
+      }
+
+      this.send('{"method":"SUBSCRIBE","params":["!miniTicker@arr@3000ms"],"id":1}')
+    }
+
+    this.$list.onmessage = function(msg) {
+      /*{
+        "e": "24hrMiniTicker",  // 事件类型
+        "E": 123456789,         // 事件时间
+        "s": "BNBBTC",          // 交易对
+        "c": "0.0025",          // 最新成交价格
+        "o": "0.0010",          // 24小时前开始第一笔成交价格
+        "h": "0.0025",          // 24小时内最高成交价
+        "l": "0.0010",          // 24小时内最低成交价
+        "v": "10000",           // 成交量
+        "q": "18"               // 成交额
+      }*/
+      let target = JSON.parse(msg.data)
+      if (typeof target.data != 'undefined') {
+
+      }
+    }
+
+    this.$list.onerror = function(e) {
+      _this.$store.state.socket.reconnecting = true
+      console.log('連線異常, 重新連線中...')
+    }
   },
   async fetch() {
-    const $this = this
+    const _this = this
+
+    //列表
+
+    //trading-notice
     let pageList = await fetch(
       'https://www.binance.com/gateway-api/v1/public/indicator/abnormal-trading-notice/pageList?pageIndex=1&pageSize=100'
     ).then(res => res.json())
@@ -53,7 +89,7 @@ export default {
   },
   methods: {
     formatTradingNotice(source, isWebsocket) {
-      let $this = this
+      let _this = this
       let type = ''
       let show = ''
       let result = []
@@ -71,10 +107,10 @@ export default {
           type = item.eventType
         }
 
-        newItem.type = $this.$t(type)
+        newItem.type = _this.$t(type)
 
         if (item.volume != null) {
-          newItem.show = $this.$options.filters.currency(item.volume) + ' ' + item.baseAsset
+          newItem.show = _this.$options.filters.currency(item.volume) + ' ' + item.baseAsset
         }
 
         if (item.priceChange != null) {
@@ -88,9 +124,9 @@ export default {
         }
 
         if (isWebsocket === true) {
-          newItem.time = $this.getTime(item.sendTimestamp)
+          newItem.time = _this.getTime(item.sendTimestamp)
         } else {
-          newItem.time = $this.getTime(item.createTimestamp)
+          newItem.time = _this.getTime(item.createTimestamp)
         }
           
         result.push(newItem)

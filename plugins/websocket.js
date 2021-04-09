@@ -9,4 +9,9 @@ export default ({ store }, inject) => {
     reconnection: true,
     reconnectionDelay: 1000
   })
+
+  //行情
+  const listUrl = 'wss://stream.binance.com:9443/stream'
+
+  Vue.prototype.$list = new ReconnectingWebSocket(listUrl)
 }
