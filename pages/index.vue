@@ -101,8 +101,12 @@ export default {
 
         if (item.eventType == 'UP_BREAKTHROUGH' || item.eventType == 'DOWN_BREAKTHROUGH') {
           type = item.eventType + '_' + item.period
-        } else if (item.eventType == 'UP_1' || item.eventType == 'DOWN_1') {
+        } else if (item.eventType.indexOf('UP_') > -1 || item.eventType.indexOf('DOWN_') > -1) {
           type = item.period
+
+          if (type == 'DAY_1') {
+            console.log(item)
+          }
         } else {
           type = item.eventType
         }
