@@ -11,11 +11,15 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/proxy": "^2.1.0",
     "core-js": "^3.8.2",
     "nuxt": "^2.14.12",
     "nuxt-i18n": "^6.23.0",
+    "nuxt-lazy-load": "^1.2.6",
     "vue-currency-filter": "^5.2.0",
-    "vue-native-websocket": "^2.0.14"
+    "vue-infinite-scroll": "^2.0.2",
+    "vue-native-websocket": "^2.0.14",
+    "vue-waterfall2": "^1.10.1"
   },
   "devDependencies": {
     "fibers": "^5.0.0",

@@ -11,7 +11,8 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: "stylesheet", type: "text/css", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" }
     ],
     script: [
       { src: '/js/reconnecting-websocket.min.js', type: 'text/javascript' },
@@ -24,7 +25,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~plugins/websocket.js', ssr: false },
-    { src: '~plugins/global.js', ssr: false }
+    { src: '~plugins/global.js', ssr: false },
+    { src: '~plugins/vue-waterfall2.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -35,6 +37,8 @@ export default {
   ],
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    'nuxt-lazy-load',
     ['vue-currency-filter/nuxt', {
       thousandsSeparator: ',',
       symbolSpacing: false
@@ -63,6 +67,10 @@ export default {
       langDir: 'locales/',
       defaultLocale: 'zh_TW',
     }]
+  ],
+  proxy: [
+    'http://127.0.0.1:8000/api',
+    'http://127.0.0.1:8000/storage',
   ],
   build: {
   }

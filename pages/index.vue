@@ -1,18 +1,15 @@
 <template>
   <div class="container">
-    <div style="width: 800px;margin: auto;">
-      <img src="~/assets/images/d.jpg" style="width: 800px;"/>
-    </div>
-    <div>
-      <ul style="max-height: 500px;overflow-y: scroll;border: 1px solid;margin: 30px;">
-        <li v-for="data in tradingNotice">
-          <div>{{ data.name }}</div>
-          <div>{{ data.type }}</div>
-          <div>{{ data.show }}</div>
-          <div>{{ data.time }}</div>
-          <hr>
-        </li>
-      </ul>
+    <div class="row">
+      <div class="col-sm" v-for="list in pageList">
+        <div class="card" style="width: 18rem;">
+          <img :src="list.logo_path" style="width: 50px;" alt="" title="" v-lazy-load>
+          <div class="card-body">
+            <h5 class="card-title">{{ list.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ list.fullName }}</h6>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +20,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return  {
+      pageList: [],
       tradingNotice: [],
     }
   },
@@ -65,13 +63,16 @@ export default {
     const _this = this
 
     //列表
+    this.pageList = await fetch(
+      'http://localhost:3000/api/base/list'
+    ).then(res => res.json())
 
     //trading-notice
-    let pageList = await fetch(
+    let notice = await fetch(
       'https://www.binance.com/gateway-api/v1/public/indicator/abnormal-trading-notice/pageList?pageIndex=1&pageSize=100'
     ).then(res => res.json())
 
-    this.formatTradingNotice(pageList.data)
+    this.formatTradingNotice(notice.data)
   },
   computed: {
     websocketConnected() {
