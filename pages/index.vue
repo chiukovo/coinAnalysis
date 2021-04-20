@@ -64,7 +64,7 @@ export default {
 
     //列表
     this.pageList = await fetch(
-      'http://localhost:3000/api/base/list'
+      process.env.BASE_URL + 'api/base/list'
     ).then(res => res.json())
 
     //trading-notice

@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -36,6 +38,7 @@ export default {
   buildModules: [
   ],
   modules: [
+    '@nuxtjs/dotenv',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     'nuxt-lazy-load',
@@ -69,8 +72,8 @@ export default {
     }]
   ],
   proxy: [
-    'http://127.0.0.1:8000/api',
-    'http://127.0.0.1:8000/storage',
+    process.env.API_URL + 'api',
+    process.env.API_URL + 'storage',
   ],
   build: {
   }
