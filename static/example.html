@@ -8,18 +8,33 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </head>
-<body class="bg-light">
-  <header class="py-3">
+<body>
+  <header class="shadow">
+    <div class="bar">
+      <div class="container px-4">
+        <span>GMT+8</span>
+        <span class="bar__date">2021-04-20</span>
+        <span class="bar__time">15:14:21</span>
+      </div>
+    </div>
     <nav class="navbar">
       <div class="container px-4">
         <div cldivss="navbar-brand">
           LOGO
         </div>
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="example.html" class="nav-link active">市場異動</a>
+          </li>
+          <li class="nav-item">
+            <a href="example-list.html" class="nav-link">市場快訊</a>
+          </li>
+        </ul>
       </div>
     </nav>
   </header>
-  <main class="container pb-3">
-    <div class="bg-white p-3 mb-5 bg-body rounded">
+  <main class="container mt-3 pb-3">
+    <div class="bg-white shadow p-3 mb-5 bg-body rounded">
       <div class="row" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative; height: 1044px;">
         <div class="col-sm-6 col-lg-4 mb-4">
           <div class="card market-ticker">
