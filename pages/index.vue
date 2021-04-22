@@ -27,7 +27,7 @@
     <no-ssr>
       <main class="container mt-3 pb-3">
         <div class="bg-white shadow p-3 mb-5 bg-body rounded">
-          <div v-masonry transition-duration="0.3s" item-selector=".item" class="masonry-container row" style="position: relative; height: 1044px;">
+          <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="masonry-container row" style="position: relative; height: 1044px;">
             <div v-masonry-tile class="col-sm-6 col-lg-4 mb-4 item" v-for="list in pageList">
               <div class="card market-ticker">
                 <div class="card-body">
@@ -70,6 +70,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return  {
+      containerId: 'main',
       pageList: [],
       tradingNotice: [],
     }
@@ -215,7 +216,7 @@ export default {
 
           countAction = list.action.length
 
-          if (countAction > 3) {
+          if (countAction > 5) {
             list.action.splice(-1, countAction - 1)
           }
 
@@ -233,6 +234,10 @@ export default {
 
       if (count > 100) {
         this.tradingNotice.splice(-1, count - 100)
+      }
+      
+      if (typeof this.$redrawVueMasonry === 'function') {
+        this.$redrawVueMasonry('main')
       }
     },
     getTime(timestamp) {
