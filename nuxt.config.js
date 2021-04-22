@@ -77,6 +77,10 @@ export default {
     process.env.API_URL + 'api',
     process.env.API_URL + 'storage',
   ],
+  server: {
+    port: 9090, // default: 3000
+    host: '0.0.0.0' // default: localhost
+  },
   build: {
   }
 }
