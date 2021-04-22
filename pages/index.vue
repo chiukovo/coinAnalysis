@@ -215,7 +215,7 @@ export default {
 
           countAction = list.action.length
 
-          if (countAction > 5) {
+          if (countAction > 3) {
             list.action.splice(-1, countAction - 1)
           }
 
