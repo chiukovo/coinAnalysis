@@ -211,14 +211,15 @@ export default {
 
         _this.pageList = _this.pageList.map(list => {
           if (list.name + '/USDT' == newItem.name) {
-            list.action.unshift(newItem)
+            list.action.pust(newItem)
           }
 
           countAction = list.action.length
 
           if (countAction > 5) {
-            list.action.splice(-1, countAction - 1)
+            list.action.splice(0, 1)
           }
+          
 
           return list
         })
