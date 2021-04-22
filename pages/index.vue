@@ -46,8 +46,8 @@
                     <li><label>24小時最高</label><span>${{ list.highPrice }}</span></li>
                     <li><label>24小時最低</label><span>${{ list.lowPrice }}</span></li>
                   </ul>
-                  <ul class="market-ticker-last" v-for="action in list.action">
-                    <li>
+                  <ul class="market-ticker-last">
+                    <li v-for="action in list.action">
                       <div class="time">{{ action.time }}</div>
                       <div class="detail">{{ action.type }}</div>
                       <div class="number" :class="action.color">{{ action.show }}</div>
