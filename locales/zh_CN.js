@@ -10,6 +10,7 @@ export default {
   "DROP_BACK": "衝高回落",
   "RISE_AGAIN": "探底回升",
   "HIGH_VOLUME_RISE_3": "放量大漲",
+  "HIGH_VOLUME_RISE_1": "放量小漲",
   "BLOCK_TRADES_BUY": "特大單買入",
   "BLOCK_TRADES_SELL": "特大單賣出"
 }

@@ -249,11 +249,11 @@ export default {
       return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2)
     },
     getColor(type) {
-      if (type.indexOf('UP') > -1 || type.indexOf('BUY') > -1 || type.indexOf('RISE') > -1) {
+      if (type.indexOf('UP') > -1 || type.indexOf('BUY') > -1 || type.indexOf('RISE') > -1 || type.indexOf('HIGH') > -1) {
         return 'text-success'
       }
 
-      if (type.indexOf('DOWN') > -1 || type.indexOf('SELL') > -1 || type.indexOf('BACK') > -1) {
+      if (type.indexOf('DOWN') > -1 || type.indexOf('SELL') > -1 || type.indexOf('BACK') > -1 || type.indexOf('LOW') > -1) {
         return 'text-danger'
       }
 
