@@ -14,7 +14,6 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: "stylesheet", type: "text/css", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" }
     ],
     script: [
       { src: '/js/reconnecting-websocket.min.js', type: 'text/javascript' },
@@ -23,11 +22,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/css/style.css',
   ],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~plugins/websocket.js', ssr: false },
     { src: '~plugins/global.js', ssr: false },
+    { src: '~/plugins/vue-masonry', ssr: false },
     { src: '~plugins/vue-waterfall2.js', ssr: false }
   ],
 
@@ -44,6 +45,7 @@ export default {
     'nuxt-lazy-load',
     ['vue-currency-filter/nuxt', {
       thousandsSeparator: ',',
+      fractionCount: 6,
       symbolSpacing: false
     }],
     ['nuxt-i18n', {
