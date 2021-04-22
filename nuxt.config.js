@@ -78,8 +78,8 @@ export default {
     process.env.API_URL + 'storage',
   ],
   server: {
-    port: 3000, // default: 3000
-    host: '0.0.0.0' // default: localhost
+    port: process.env.PORT || 3000, // default: 3000
+    host: process.env.HOST || '0.0.0.0' // default: localhost
   },
   build: {
   }
