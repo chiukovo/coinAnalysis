@@ -211,7 +211,7 @@ export default {
 
         _this.pageList = _this.pageList.map(list => {
           if (list.name + '/USDT' == newItem.name) {
-            list.action.pust(newItem)
+            list.action.push(newItem)
           }
 
           countAction = list.action.length
