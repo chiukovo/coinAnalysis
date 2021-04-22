@@ -135,18 +135,22 @@ export default {
   },
   async fetch() {
     const _this = this
+    let notice = []
 
     //列表
     this.pageList = await fetch(
       process.env.BASE_URL + 'api/base/list'
     ).then(res => res.json())
 
-    //trading-notice
-    let notice = await fetch(
-      'https://www.binance.com/gateway-api/v1/public/indicator/abnormal-trading-notice/pageList?pageIndex=1&pageSize=100'
-    ).then(res => res.json())
+    for (let index = 3; index >= 1; index--) {
+        
+      //trading-notice
+      notice = await fetch(
+        'https://www.binance.com/gateway-api/v1/public/indicator/abnormal-trading-notice/pageList?pageIndex=' + index + '&pageSize=100'
+      ).then(res => res.json())
 
-    this.formatTradingNotice(notice.data)
+      this.formatTradingNotice(notice.data)
+    }
   },
   computed: {
     websocketConnected() {
@@ -211,15 +215,18 @@ export default {
 
         _this.pageList = _this.pageList.map(list => {
           if (list.name + '/USDT' == newItem.name) {
-            list.action.push(newItem)
+            list.action.unshift(newItem)
           }
 
           countAction = list.action.length
 
           if (countAction > 5) {
-            list.action.splice(0, 1)
+            list.action.splice(-1, countAction - 1)
           }
-          
+
+          list.action.sort(function (a, b) {
+            return new Date('2012-06-08 ' + b.time).getTime() - new Date('2012-06-08 ' + a.time).getTime();
+          })
 
           return list
         })
