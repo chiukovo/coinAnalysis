@@ -15,10 +15,10 @@
           </div>
           <ul class="nav">
             <li class="nav-item">
-              <a href="/" class="nav-link active">市場異動</a>
+              <a href="/" class="nav-link" :class="path == '/' ? 'active' : ''">市場異動</a>
             </li>
             <li class="nav-item">
-              <a href="/news" class="nav-link">市場快訊</a>
+              <a href="/news" class="nav-link" :class="path == '/news' ? 'active' : ''">市場快訊</a>
             </li>
           </ul>
         </div>
@@ -34,9 +34,11 @@ export default {
     return  {
       nowDay: '',
       nowTime: '',
+      path: '',
     }
   },
   mounted() {
+    this.path = this.$nuxt.$route.path
     this.nowTimes()
   },
   methods: {

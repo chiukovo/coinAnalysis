@@ -171,12 +171,12 @@ export default {
         }
 
         newItem.color = _this.getColor(item.eventType)
-        newItem.icon_url = _this.getIconUrl(item.eventType)
 
         newItem.type = _this.$t(type)
 
         if (item.volume != null) {
           newItem.show = item.volume + ' ' + item.baseAsset
+          newItem.icon_url = _this.getIconUrl(type, item.volume)
         }
 
         if (item.priceChange != null) {
@@ -187,6 +187,7 @@ export default {
           }
 
           newItem.show = newItem.show + '%'
+          newItem.icon_url = _this.getIconUrl(type, item.priceChange)
         }
 
         if (isWebsocket === true) {
@@ -251,9 +252,25 @@ export default {
 
       return ''
     },
-    getIconUrl(type) {
+    getIconUrl(type, num) {
       if (type.indexOf('BLOCK_TRADES') > -1) {
         return 'icon_big.svg'
+      }
+
+      if (type.indexOf('MINUTE_') > -1 || type.indexOf('HOUR_') > -1 || type.indexOf('DAY_') > -1) {
+        if (num > 0) {
+          return 'icon_up.svg'
+        } else {
+          return 'icon_down.svg'
+        }
+      }
+
+      if (type.indexOf('DROP_BACK') > -1) {
+        return 'icon_dropback.svg'
+      }
+
+      if (type.indexOf('RISE_AGAIN') > -1) {
+        return 'icon_riseagain.svg'
       }
 
       return ''

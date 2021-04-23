@@ -5,7 +5,7 @@ export default {
   head: {
     title: 'coinAnalysis',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'zh-TW'
     },
     meta: [
       { charset: 'utf-8' },
@@ -29,6 +29,7 @@ export default {
     { src: '~plugins/websocket.js', ssr: false },
     { src: '~plugins/global.js', ssr: false },
     { src: '~/plugins/vue-masonry', ssr: false },
+    { src: '~plugins/vue-infinite-scroll.js', ssr: false },
     { src: '~plugins/vue-waterfall2.js', ssr: false }
   ],
 
