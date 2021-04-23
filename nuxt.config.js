@@ -10,7 +10,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '比特幣深度分析,區塊鏈策略解析,數字貨幣動態分析,虛擬貨幣資訊剖析,幣快訊,幣動態' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

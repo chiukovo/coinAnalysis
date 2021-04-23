@@ -115,6 +115,12 @@ export default {
       _this.$store.state.socket.reconnecting = true
       console.log('連線異常, 重新連線中...')
     }
+
+    setTimeout(function(){
+      if (typeof this.$redrawVueMasonry === 'function') {
+        this.$redrawVueMasonry('main')
+      }
+    }, 500)
   },
   async fetch() {
     const _this = this
@@ -126,7 +132,7 @@ export default {
     ).then(res => res.json())
 
     for (let index = 3; index >= 1; index--) {
-        
+
       //trading-notice
       notice = await fetch(
         'https://www.binance.com/gateway-api/v1/public/indicator/abnormal-trading-notice/pageList?pageIndex=' + index + '&pageSize=100'
