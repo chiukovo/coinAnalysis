@@ -1,62 +1,67 @@
 <template>
   <div>
+    <header class="shadow">
+      <div class="bar">
+        <div class="container px-4">
+          <span>GMT+8</span>
+          <span class="bar__date">{{ nowDay }}</span>
+          <span class="bar__time">{{ nowTime }}</span>
+        </div>
+      </div>
+      <nav class="navbar">
+        <div class="container px-4">
+          <div cldivss="navbar-brand">
+            LOGO
+          </div>
+          <ul class="nav">
+            <li class="nav-item">
+              <a href="/" class="nav-link active">市場異動</a>
+            </li>
+            <li class="nav-item">
+              <a href="/news" class="nav-link">市場快訊</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
     <Nuxt />
   </div>
 </template>
 
-<style>
-html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<script>
+export default {
+  data() {
+    return  {
+      nowDay: '',
+      nowTime: '',
+    }
+  },
+  mounted() {
+    this.nowTimes()
+  },
+  methods: {
+    timeFormate(timeStamp) {
+      let newdate = new Date(timeStamp)
+      let week = ['日', '一', '二', '三', '四', '五', '六']
+      
+      let year  = newdate.getFullYear()
+      let month = newdate.getMonth() + 1 < 10? "0" + (newdate.getMonth() + 1): newdate.getMonth() + 1
+      let date  = newdate.getDate() < 10? "0" + newdate.getDate(): newdate.getDate()
+      let hh    = newdate.getHours() < 10? "0" + newdate.getHours(): newdate.getHours()
+      let mm    = newdate.getMinutes() < 10? "0" + newdate.getMinutes(): newdate.getMinutes()
+      let ss    = newdate.getSeconds() < 10? "0" + newdate.getSeconds(): newdate.getSeconds()
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
+      this.nowTime = hh+":"+mm + ":" + ss
+      this.nowDay = year + "年" + month + "月" + date +"日"
+    },
+    // 定時器函數
+    nowTimes() {      
+      let self = this
+      self.timeFormate(new Date())
+      setInterval(function(){
+        self.timeFormate(new Date())
+      }, 1000)
+    },
+  }
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
-</style>
+</script>

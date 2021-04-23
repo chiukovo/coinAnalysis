@@ -1,29 +1,5 @@
 <template>
   <div>
-    <header class="shadow">
-      <div class="bar">
-        <div class="container px-4">
-          <span>GMT+8</span>
-          <span class="bar__date">{{ nowDay }}</span>
-          <span class="bar__time">{{ nowTime }}</span>
-        </div>
-      </div>
-      <nav class="navbar">
-        <div class="container px-4">
-          <div cldivss="navbar-brand">
-            LOGO
-          </div>
-          <ul class="nav">
-            <li class="nav-item">
-              <a href="#" class="nav-link active">市場異動</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">市場快訊</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
     <no-ssr>
       <main class="container mt-3 pb-3">
         <div class="bg-white shadow p-3 mb-5 bg-body rounded">
@@ -50,7 +26,12 @@
                     <li v-for="action in list.action">
                       <div class="time">{{ action.time }}</div>
                       <div class="detail">{{ action.type }}</div>
-                      <div class="number" :class="action.color">{{ action.show }}</div>
+                      <div class="number" :class="'text-' + action.color">
+                        {{ action.show }}
+                        <i :class="'bg-' + action.color" v-if="action.icon_url != ''">
+                          <img :src="require(`~/assets/images/${action.icon_url}`)">
+                        </i>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -79,8 +60,6 @@ export default {
   },
   mounted() {
     const _this = this
-
-    this.nowTimes()
 
     this.$list.onopen = function(e) {
       if (_this.$store.state.socket.reconnecting) {
@@ -192,6 +171,7 @@ export default {
         }
 
         newItem.color = _this.getColor(item.eventType)
+        newItem.icon_url = _this.getIconUrl(item.eventType)
 
         newItem.type = _this.$t(type)
 
@@ -262,37 +242,22 @@ export default {
     },
     getColor(type) {
       if (type.indexOf('UP') > -1 || type.indexOf('BUY') > -1 || type.indexOf('RISE') > -1 || type.indexOf('HIGH') > -1) {
-        return 'text-success'
+        return 'success'
       }
 
       if (type.indexOf('DOWN') > -1 || type.indexOf('SELL') > -1 || type.indexOf('BACK') > -1 || type.indexOf('LOW') > -1) {
-        return 'text-danger'
+        return 'danger'
       }
 
       return ''
     },
-    timeFormate(timeStamp) {
-      let newdate = new Date(timeStamp)
-      let week = ['日', '一', '二', '三', '四', '五', '六']
-      
-      let year  = newdate.getFullYear()
-      let month = newdate.getMonth() + 1 < 10? "0" + (newdate.getMonth() + 1): newdate.getMonth() + 1
-      let date  = newdate.getDate() < 10? "0" + newdate.getDate(): newdate.getDate()
-      let hh    = newdate.getHours() < 10? "0" + newdate.getHours(): newdate.getHours()
-      let mm    = newdate.getMinutes() < 10? "0" + newdate.getMinutes(): newdate.getMinutes()
-      let ss    = newdate.getSeconds() < 10? "0" + newdate.getSeconds(): newdate.getSeconds()
+    getIconUrl(type) {
+      if (type.indexOf('BLOCK_TRADES') > -1) {
+        return 'icon_big.svg'
+      }
 
-      this.nowTime = hh+":"+mm + ":" + ss
-      this.nowDay = year + "年" + month + "月" + date +"日"
-     },
-    // 定時器函數
-    nowTimes(){        
-      let self = this
-      self.timeFormate(new Date())
-      setInterval(function(){
-        self.timeFormate(new Date())
-      }, 1000)
-    },
+      return ''
+    }
   }
 }
 </script>
