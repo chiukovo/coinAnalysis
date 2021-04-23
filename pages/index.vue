@@ -134,6 +134,8 @@ export default {
 
       this.formatTradingNotice(notice.data)
     }
+
+    this.goResize()
   },
   computed: {
     websocketConnected() {
@@ -150,6 +152,11 @@ export default {
     }
   },
   methods: {
+    goResize() {
+      if (typeof this.$redrawVueMasonry === 'function') {
+        this.$redrawVueMasonry('main')
+      }
+    },
     formatTradingNotice(source, isWebsocket) {
       let _this = this
       let type = ''
@@ -215,10 +222,6 @@ export default {
 
           return list
         })
-
-        if (typeof _this.$redrawVueMasonry === 'function') {
-          _this.$redrawVueMasonry('main')
-        }
       })
 
       if (isWebsocket === true) {
@@ -232,6 +235,8 @@ export default {
       if (count > 100) {
         this.tradingNotice.splice(-1, count - 100)
       }
+
+      this.goResize()
     },
     getTime(timestamp) {
       const date = new Date(timestamp)
