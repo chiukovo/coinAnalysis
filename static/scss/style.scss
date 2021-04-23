@@ -15,6 +15,9 @@ a {
 
 header {
   background-color: #fff;
+  .logo {
+    width: 100px;
+  }
   .nav {
     font-size: 13px;
     a.nav-link {
@@ -48,6 +51,10 @@ header {
 // }
 
 .market-ticker {
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(#eff0f3, .36);
+  }
   .card-title {
     font-size: 13px;
     position: relative;
