@@ -125,7 +125,7 @@ export default {
       process.env.BASE_URL + 'api/base/list'
     ).then(res => res.json())
 
-    for (let index = 3; index >= 1; index--) {
+    for (let index = 2; index >= 1; index--) {
 
       //trading-notice
       notice = await fetch(
