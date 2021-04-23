@@ -10,8 +10,8 @@
       </div>
       <nav class="navbar">
         <div class="container px-4">
-          <div cldivss="navbar-brand">
-            LOGO
+          <div cldivss="navbar-brand" style="width: 100px">
+            <img src="~assets/images/logo.svg" alt="幣幣動態">
           </div>
           <ul class="nav">
             <li class="nav-item">

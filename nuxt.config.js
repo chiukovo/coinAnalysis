@@ -3,7 +3,7 @@ require('dotenv').config()
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'coinAnalysis',
+    title: process.env.WEB_NAME,
     htmlAttrs: {
       lang: 'zh-TW'
     },
