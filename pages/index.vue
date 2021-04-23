@@ -115,12 +115,6 @@ export default {
       _this.$store.state.socket.reconnecting = true
       console.log('連線異常, 重新連線中...')
     }
-
-    setTimeout(function(){
-      if (typeof this.$redrawVueMasonry === 'function') {
-        this.$redrawVueMasonry('main')
-      }
-    }, 500)
   },
   async fetch() {
     const _this = this
@@ -221,6 +215,10 @@ export default {
 
           return list
         })
+
+        if (typeof _this.$redrawVueMasonry === 'function') {
+          _this.$redrawVueMasonry('main')
+        }
       })
 
       if (isWebsocket === true) {
@@ -233,10 +231,6 @@ export default {
 
       if (count > 100) {
         this.tradingNotice.splice(-1, count - 100)
-      }
-      
-      if (typeof this.$redrawVueMasonry === 'function') {
-        this.$redrawVueMasonry('main')
       }
     },
     getTime(timestamp) {
