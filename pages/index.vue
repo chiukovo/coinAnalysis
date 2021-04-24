@@ -116,6 +116,9 @@ export default {
       console.log('連線異常, 重新連線中...')
     }
   },
+  updated() {
+    this.goResize()
+  },
   async fetch() {
     const _this = this
     let notice = []
@@ -134,8 +137,6 @@ export default {
 
       this.formatTradingNotice(notice.data)
     }
-
-    this.goResize()
   },
   computed: {
     websocketConnected() {
@@ -223,20 +224,6 @@ export default {
           return list
         })
       })
-
-      if (isWebsocket === true) {
-        this.tradingNotice.unshift(newItem)
-      } else {
-        this.tradingNotice = result
-      }
-
-      let count = this.tradingNotice.length
-
-      if (count > 100) {
-        this.tradingNotice.splice(-1, count - 100)
-      }
-
-      this.goResize()
     },
     getTime(timestamp) {
       const date = new Date(timestamp)
