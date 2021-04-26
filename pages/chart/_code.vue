@@ -1,50 +1,9 @@
 <template>
-  <div>
-    <no-ssr>
-      <main class="container mt-3 pb-3">
-        <div class="bg-white shadow p-3 mb-5 bg-body rounded">
-          <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="masonry-container row" style="position: relative; height: 1044px;">
-            <div v-masonry-tile class="col-sm-6 col-lg-4 mb-4 item" v-for="list in pageList">
-              <a :href="'/chart/' + list.name + 'USDT'">
-                <div class="card market-ticker">
-                  <div class="card-body">
-                    <div class="card-title">
-                      <div class="title-left">
-                        <div class="title-icon"><img :src="list.logo_path"></div>
-                        <div class="title-name">{{ list.name }}</div>
-                      </div>
-                      <small class="card-title-right">
-                        <div class="text-success" v-if="list.priceChangePercent > 0">+{{ list.priceChangePercent }}%</div>
-                        <div class="text-danger" v-else>{{ list.priceChangePercent }}%</div>
-                      </small>
-                    </div>
-                    <h4>${{ list.lastPrice }}</h4>
-                    <ul class="market-ticker-24info">
-                      <li><label>24小時最高</label><span>${{ list.highPrice }}</span></li>
-                      <li><label>24小時最低</label><span>${{ list.lowPrice }}</span></li>
-                    </ul>
-                    <ul class="market-ticker-last">
-                      <li v-for="action in list.action">
-                        <div class="time">{{ action.time }}</div>
-                        <div class="detail">{{ action.type }}</div>
-                        <div class="number" :class="'text-' + action.color">
-                          <span>{{ action.show }}</span>
-                          <i :class="'bg-' + action.color" v-if="action.icon_url != ''">
-                            <img :src="require(`~/assets/images/${action.icon_url}`)">
-                          </i>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </main>
-    </no-ssr>
-
-  </div>
+  <main class="container mt-3 pb-3" style="height: 100%">
+    <div class="tradingview-widget-container w100">
+      <div id="tradingview" class="w100"></div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -53,7 +12,6 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return  {
-      containerId: 'main',
       pageList: [],
       tradingNotice: [],
     }
@@ -116,12 +74,35 @@ export default {
       console.log('連線異常, 重新連線中...')
     }
 
+    new TradingView.widget(
+      {
+        "autosize": true,
+        "symbol": "BINANCE:" + this.code,
+        "interval": "D",
+        "timezone": "Asia/Taipei",
+        "theme": "light",
+        "style": "1",
+        "locale": "zh_TW",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "withdateranges": true,
+        "hide_side_toolbar": false,
+        "allow_symbol_change": true,
+        "details": true,
+        "hotlist": true,
+        "calendar": true,
+        "container_id": "tradingview"
+      }
+    )
+
     this.$nextTick(() => {
       this.$nuxt.$loading.finish()
     })
   },
-  updated() {
-    this.goResize()
+  async asyncData({ params }) {
+    const code = params.code
+
+    return { code }
   },
   async fetch() {
     const _this = this
@@ -157,11 +138,6 @@ export default {
     }
   },
   methods: {
-    goResize() {
-      if (typeof this.$redrawVueMasonry === 'function') {
-        this.$redrawVueMasonry('main')
-      }
-    },
     formatTradingNotice(source, isWebsocket) {
       let _this = this
       let type = ''

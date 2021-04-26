@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w100">
     <header class="shadow">
       <div class="bar">
         <div class="container px-4">
@@ -11,7 +11,9 @@
       <nav class="navbar">
         <div class="container px-4">
           <div cldivss="navbar-brand" style="width: 100px">
-            <img src="~assets/images/logo.svg" alt="幣幣動態">
+            <a href="/">
+              <img src="~assets/images/logo.svg" alt="幣幣動態">
+            </a>
           </div>
           <ul class="nav">
             <li class="nav-item">
@@ -67,3 +69,9 @@ export default {
   }
 }
 </script>
+<style>
+html, body, #__nuxt, #__layout, .w100 {
+  width: 100%;
+  height: 100%;
+}
+</style>
