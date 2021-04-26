@@ -60,6 +60,10 @@ export default {
   },
   mounted() {
     const _this = this
+            
+    this.$nextTick(() => {
+      //this.$nuxt.$loading.finish()
+    })
 
     this.$list.onopen = function(e) {
       if (_this.$store.state.socket.reconnecting) {

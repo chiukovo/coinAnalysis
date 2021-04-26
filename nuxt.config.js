@@ -20,7 +20,7 @@ export default {
       { src: '/js/reconnecting-websocket.min.js', type: 'text/javascript' },
     ]
   },
-
+  loading: '~/components/LoadingBar.vue',
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/css/style.css',
