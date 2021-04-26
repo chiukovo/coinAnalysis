@@ -18,7 +18,7 @@ export default {
     ],
     script: [
       { src: '/js/reconnecting-websocket.min.js', type: 'text/javascript' },
-      { src: 'https://s3.tradingview.com/tv.js', type: 'text/javascript' },
+      { src: '/js/tv.js', type: 'text/javascript' },
     ]
   },
   loading: '~/components/LoadingBar.vue',

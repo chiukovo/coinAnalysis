@@ -1,5 +1,5 @@
 <template>
-  <main class="container mt-3 pb-3" style="height: 100%">
+  <main class="container mt-3 pb-3" :style="checkChartHeight()">
     <div class="tradingview-widget-container w100">
       <div id="tradingview" class="w100"></div>
     </div>
@@ -150,6 +150,9 @@ export default {
     }
   },
   methods: {
+    checkChartHeight() {
+      return 'height: calc(100% - 130px)'
+    },
     formatTradingNotice(source, isWebsocket) {
       let _this = this
       let type = ''
