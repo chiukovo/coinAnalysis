@@ -5,39 +5,37 @@
         <div class="bg-white shadow p-3 mb-5 bg-body rounded">
           <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="masonry-container row" style="position: relative; height: 1044px;">
             <div v-masonry-tile class="col-sm-6 col-lg-4 mb-4 item" v-for="list in pageList">
-              <a :href="'/chart/' + list.name + 'USDT'">
-                <div class="card market-ticker">
-                  <div class="card-body">
-                    <div class="card-title">
-                      <div class="title-left">
-                        <div class="title-icon"><img :src="list.logo_path"></div>
-                        <div class="title-name">{{ list.name }}</div>
-                      </div>
-                      <small class="card-title-right">
-                        <div class="text-success" v-if="list.priceChangePercent > 0">+{{ list.priceChangePercent }}%</div>
-                        <div class="text-danger" v-else>{{ list.priceChangePercent }}%</div>
-                      </small>
+              <div class="card market-ticker" @click="goChart(list)">
+                <div class="card-body">
+                  <div class="card-title">
+                    <div class="title-left">
+                      <div class="title-icon"><img :src="list.logo_path"></div>
+                      <div class="title-name">{{ list.name }}</div>
                     </div>
-                    <h4>${{ list.lastPrice }}</h4>
-                    <ul class="market-ticker-24info">
-                      <li><label>24小時最高</label><span>${{ list.highPrice }}</span></li>
-                      <li><label>24小時最低</label><span>${{ list.lowPrice }}</span></li>
-                    </ul>
-                    <ul class="market-ticker-last">
-                      <li v-for="action in list.action">
-                        <div class="time">{{ action.time }}</div>
-                        <div class="detail">{{ action.type }}</div>
-                        <div class="number" :class="'text-' + action.color">
-                          <span>{{ action.show }}</span>
-                          <i :class="'bg-' + action.color" v-if="action.icon_url != ''">
-                            <img :src="require(`~/assets/images/${action.icon_url}`)">
-                          </i>
-                        </div>
-                      </li>
-                    </ul>
+                    <small class="card-title-right">
+                      <div class="text-success" v-if="list.priceChangePercent > 0">+{{ list.priceChangePercent }}%</div>
+                      <div class="text-danger" v-else>{{ list.priceChangePercent }}%</div>
+                    </small>
                   </div>
+                  <h4>${{ list.lastPrice }}</h4>
+                  <ul class="market-ticker-24info">
+                    <li><label>24小時最高</label><span>${{ list.highPrice }}</span></li>
+                    <li><label>24小時最低</label><span>${{ list.lowPrice }}</span></li>
+                  </ul>
+                  <ul class="market-ticker-last">
+                    <li v-for="action in list.action">
+                      <div class="time">{{ action.time }}</div>
+                      <div class="detail">{{ action.type }}</div>
+                      <div class="number" :class="'text-' + action.color">
+                        <span>{{ action.show }}</span>
+                        <i :class="'bg-' + action.color" v-if="action.icon_url != ''">
+                          <img :src="require(`~/assets/images/${action.icon_url}`)">
+                        </i>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>
@@ -98,6 +96,8 @@ export default {
       }*/
       let target = JSON.parse(msg.data)
       let lastPriceLength = 0
+      let highPriceLength = 0
+      let lowPriceLength = 0
 
       if (typeof target.data != 'undefined') {
         target.data.forEach(function(item, i) {
@@ -109,9 +109,19 @@ export default {
               list.lowPrice = item.l.replace(/0+$/, '')
                     
               lastPriceLength = list.lastPrice.toString().split(".")[1].length
+              highPriceLength = list.highPrice.toString().split(".")[1].length
+              lowPriceLength = list.lowPrice.toString().split(".")[1].length
               
               if (lastPriceLength <= 1) {
                 list.lastPrice = parseFloat(list.lastPrice).toFixed(2)
+              }
+
+              if (highPriceLength <= 1) {
+                list.highPrice = parseFloat(list.highPrice).toFixed(2)
+              }
+
+              if (lowPriceLength <= 1) {
+                list.lowPrice = parseFloat(list.lowPrice).toFixed(2)
               }
             }
           })
@@ -278,6 +288,9 @@ export default {
       }
 
       return ''
+    },
+    goChart(list) {
+      location.href = '/chart/' + list.name + 'USDT'
     }
   }
 }
