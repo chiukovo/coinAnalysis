@@ -47,6 +47,9 @@ export default {
     }
   },
   mounted() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.finish()
+    })
   },
   async fetch() {
     const _this = this
@@ -70,8 +73,6 @@ export default {
           _this.pageList.push(item)
         })
       })
-
-
     }
   }
 }

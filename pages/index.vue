@@ -60,10 +60,6 @@ export default {
   },
   mounted() {
     const _this = this
-            
-    this.$nextTick(() => {
-      //this.$nuxt.$loading.finish()
-    })
 
     this.$list.onopen = function(e) {
       if (_this.$store.state.socket.reconnecting) {
@@ -119,6 +115,10 @@ export default {
       _this.$store.state.socket.reconnecting = true
       console.log('連線異常, 重新連線中...')
     }
+
+    this.$nextTick(() => {
+      this.$nuxt.$loading.finish()
+    })
   },
   updated() {
     this.goResize()
