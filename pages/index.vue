@@ -97,6 +97,8 @@ export default {
         "n": 18151          // 24小时内成交数
       }*/
       let target = JSON.parse(msg.data)
+      let lastPriceLength = 0
+
       if (typeof target.data != 'undefined') {
         target.data.forEach(function(item, i) {
           _this.pageList.forEach(function(list, key) {
@@ -105,6 +107,12 @@ export default {
               list.lastPrice = item.c.replace(/0+$/, '')
               list.highPrice = item.h.replace(/0+$/, '')
               list.lowPrice = item.l.replace(/0+$/, '')
+                    
+              lastPriceLength = list.lastPrice.toString().split(".")[1].length
+              
+              if (lastPriceLength <= 1) {
+                list.lastPrice = parseFloat(list.lastPrice).toFixed(2)
+              }
             }
           })
         })

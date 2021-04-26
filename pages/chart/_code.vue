@@ -12,8 +12,19 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return  {
-      pageList: [],
+      base: {
+        priceChangePercent: 0,
+        lastPrice: 0,
+        highPrice: 0,
+        lowPrice: 0,
+      },
       tradingNotice: [],
+      title: process.env.WEB_NAME
+    }
+  },
+  head() {
+    return {
+      title: this.title
     }
   },
   mounted() {
@@ -25,7 +36,9 @@ export default {
         location.reload()
       }
 
-      this.send('{"method":"SUBSCRIBE","params":["!ticker@arr@3000ms"],"id":1}')
+      let params = _this.code.toLowerCase()
+
+      this.send('{"method":"SUBSCRIBE","params":["' + params + '@ticker"],"id":1}')
     }
 
     this.$list.onmessage = function(msg) {
@@ -55,17 +68,21 @@ export default {
         "n": 18151          // 24小时内成交数
       }*/
       let target = JSON.parse(msg.data)
+
       if (typeof target.data != 'undefined') {
-        target.data.forEach(function(item, i) {
-          _this.pageList.forEach(function(list, key) {
-            if (item.s == list.name + 'USDT') {
-              list.priceChangePercent = item.P.replace(/0+$/, '')
-              list.lastPrice = item.c.replace(/0+$/, '')
-              list.highPrice = item.h.replace(/0+$/, '')
-              list.lowPrice = item.l.replace(/0+$/, '')
-            }
-          })
-        })
+        _this.base.priceChangePercent = target.data.P.replace(/0+$/, '')
+        _this.base.lastPrice = target.data.c.replace(/0+$/, '')
+
+        let lastPriceLength = _this.base.lastPrice.toString().split(".")[1].length
+        
+        if (lastPriceLength <= 1) {
+          _this.base.lastPrice = parseFloat(_this.base.lastPrice).toFixed(2)
+        }
+
+        _this.base.highPrice = target.data.h.replace(/0+$/, '')
+        _this.base.lowPrice = target.data.l.replace(/0+$/, '')
+
+        _this.title = _this.base.lastPrice + ' | ' + _this.code + ' | ' + process.env.WEB_NAME
       }
     }
 
@@ -107,11 +124,6 @@ export default {
   async fetch() {
     const _this = this
     let notice = []
-
-    //列表
-    this.pageList = await fetch(
-      process.env.BASE_URL + 'api/base/list'
-    ).then(res => res.json())
 
     for (let index = 2; index >= 1; index--) {
 
@@ -186,7 +198,7 @@ export default {
           
         result.push(newItem)
 
-        _this.pageList = _this.pageList.map(list => {
+        /*_this.pageList = _this.pageList.map(list => {
           if (list.name + '/USDT' == newItem.name) {
             list.action.unshift(newItem)
           }
@@ -202,7 +214,7 @@ export default {
           })
 
           return list
-        })
+        })*/
       })
     },
     getTime(timestamp) {
