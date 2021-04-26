@@ -27,7 +27,7 @@
                       <div class="time">{{ action.time }}</div>
                       <div class="detail">{{ action.type }}</div>
                       <div class="number" :class="'text-' + action.color">
-                        {{ action.show }}
+                        <span>{{ action.show }}</span>
                         <i :class="'bg-' + action.color" v-if="action.icon_url != ''">
                           <img :src="require(`~/assets/images/${action.icon_url}`)">
                         </i>
