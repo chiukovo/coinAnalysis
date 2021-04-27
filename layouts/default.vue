@@ -48,6 +48,7 @@ export default {
       nowDay: '',
       nowTime: '',
       path: '',
+      chatStart: false
     }
   },
   mounted() {
@@ -59,6 +60,17 @@ export default {
     gtag('js', new Date());
 
     gtag('config', 'G-1Q4XGHYDN2')
+  },
+  updated() {
+    if (!this.chatStart) {
+      window.DeadSimpleChat.initBubble({
+          mode: "small",
+          roomId: "JaTWzh2FL",
+          open: false
+      })
+
+      this.chatStart = true
+    }
   },
   methods: {
     timeFormate(timeStamp) {

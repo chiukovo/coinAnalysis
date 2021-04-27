@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div id="tlkio" data-channel="coincoin543" data-theme="theme--minimal" data-custom-css="https://coincoin543.com/css/chat.css" style="height: 350px;"></div>
   </div>
 </template>
 
