@@ -26,7 +26,7 @@
             <ul class="page-wrap" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
               <li v-for="list in pageList">
                 <div class="content">
-                  <a :href="'/news/' + list.id" class="news-title">
+                  <a :href="'/news/detail?id=' + list.id" class="news-title">
                     <h3>
                       <span class="newsfocus" v-if="list.hot">精選</span>
                       {{ list.title }}
@@ -36,7 +36,7 @@
                     </span>
                   </a>
                   <div class="news-content">
-                    <a :href="'/news/' + list.id" class="news-article">
+                    <a :href="'/news/detail?id=' + list.id" class="news-article">
                       {{ list.content }}
                     </a>
                     <div class="news-info">
