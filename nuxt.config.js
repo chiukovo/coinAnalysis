@@ -34,6 +34,7 @@ export default {
     { src: '~/plugins/vue-masonry', ssr: false },
     { src: '~plugins/vue-infinite-scroll.js', ssr: false },
     { src: '~plugins/vue-infinite-loading.js', ssr: false },
+    { src: '~plugins/v-calendar.js', ssr: false },
     { src: '~plugins/vue-waterfall2.js', ssr: false }
   ],
 

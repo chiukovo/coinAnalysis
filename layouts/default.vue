@@ -1,5 +1,10 @@
 <template>
   <div class="w100">
+    <div class="gotop" @click="goTop()">
+      <div class="gotop-wrap shadow">
+        <div class="gotop-arrow"></div>
+      </div>
+    </div>
     <header class="shadow fixed-top">
       <div class="bar">
         <div class="container px-4">
@@ -10,9 +15,9 @@
       </div>
       <nav class="navbar">
         <div class="container px-4">
-          <div cldivss="navbar-brand" style="width: 100px">
+          <div cldivss="navbar-brand">
             <a href="/">
-              <img src="~assets/images/logo.svg" alt="幣幣動態">
+              <img src="~assets/images/logo.svg" alt="幣幣動態" style="width: 100px">
             </a>
           </div>
           <ul class="nav">
@@ -20,13 +25,17 @@
               <a href="/" class="nav-link" :class="path == '/' ? 'active' : ''">市場異動</a>
             </li>
             <li class="nav-item">
-              <a href="/news" class="nav-link" :class="path == '/news' ? 'active' : ''">市場快訊</a>
+              <a href="/news" class="nav-link" :class="path.indexOf('news') ? 'active' : ''">市場快訊</a>
             </li>
           </ul>
         </div>
       </nav>
     </header>
     <Nuxt />
+    <footer>
+      <p class="copyright">Copyright © 2021 幣幣 保留一切權利。</p>
+      <p>免責聲明：幣幣動態作為開放的資訊分享平台，與幣幣動態平台立場無關，且不構成任何投資理財建議。</p>
+    </footer>
   </div>
 </template>
 
@@ -41,6 +50,7 @@ export default {
   },
   mounted() {
     this.path = this.$nuxt.$route.path
+    console.log(this.path)
     this.nowTimes()
   },
   methods: {
@@ -66,6 +76,9 @@ export default {
         self.timeFormate(new Date())
       }, 1000)
     },
+    goTop() {
+      window.scrollTo({top: 0})
+    }
   }
 }
 </script>

@@ -1,13 +1,32 @@
 <template>
   <div>
     <main class="container pb-3">
-      <div class="bg-white shadow p-3 mb-5 bg-body rounded">
-        <div class="page">
+      <div class="page shadow rounded">
+        <div class="page-list">.
+          <div class="page-date">
+            <no-ssr>
+              <v-date-picker class="inline-block h-full" v-model="date" @dayclick="onDayClick">
+                <template v-slot="{ inputValue, togglePopover }">
+                  <div class="flex items-center">
+                    <div class="calendar" @click="togglePopover()">
+                      <span class="month">{{ m }}月</span>
+                      <span class="day">{{ d }}</span>
+                    </div>
+                  </div>
+                </template>
+              </v-date-picker>
+            </no-ssr>
+
+            <div class="info">
+              <span class="current">快訊</span>
+              <span class="week">{{ TW_day }}</span>
+            </div>
+          </div>
           <div class="page-content">
             <ul class="page-wrap" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
               <li v-for="list in pageList">
                 <div class="content">
-                  <a href="#" class="news-title">
+                  <a :href="'/news/' + list.id" class="news-title">
                     <h3>
                       <span class="newsfocus" v-if="list.hot">精選</span>
                       {{ list.title }}
@@ -17,7 +36,7 @@
                     </span>
                   </a>
                   <div class="news-content">
-                    <a href="#" class="news-article">
+                    <a :href="'/news/' + list.id" class="news-article">
                       {{ list.content }}
                     </a>
                     <div class="news-info">
@@ -30,7 +49,7 @@
               </li>
             </ul>
             <no-ssr>
-              <infinite-loading></infinite-loading>
+              <infinite-loading v-if="!isEmpty"></infinite-loading>
             </no-ssr>
           </div>
         </div>
@@ -45,7 +64,12 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return  {
+      date: '',
+      m: '',
+      d: '',
+      TW_day: '',
       pageList: [],
+      isEmpty: false,
       page: 1,
     }
   },
@@ -56,11 +80,24 @@ export default {
   },
   async fetch() {
     const _this = this
+    let source = []
+    let date = this.$route.query.date
+    
+    if (typeof date == 'undefined') {
+      date = new Date().toISOString().slice(0, 10)
+    }
+
+    this.date = date
     
     //列表
-    this.pageList = await fetch(
-      process.env.BASE_URL + 'api/article/list'
+    source = await fetch(
+      process.env.BASE_URL + 'api/article/list?date=' + this.date
     ).then(res => res.json())
+
+    this.pageList = source.data
+    this.m = source.m
+    this.d = source.d
+    this.TW_day = source.TW_day
   },
   methods: {
     loadMore() {
@@ -70,12 +107,19 @@ export default {
       this.page++
 
       this.$axios.get(process.env.BASE_URL + 'api/article/list?page=' + this.page).then(res => {
-        newPageList = res.data
+        newPageList = res.data.data
+
+        if (newPageList.length == 0) {
+          _this.isEmpty = true
+        }
 
         newPageList.forEach(function(item, i) {
           _this.pageList.push(item)
         })
       })
+    },
+    onDayClick(day) {
+      location.href = '/news?date=' + day.id
     }
   }
 }

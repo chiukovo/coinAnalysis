@@ -221,24 +221,6 @@ export default {
         }
           
         result.push(newItem)
-
-        /*_this.pageList = _this.pageList.map(list => {
-          if (list.name + '/USDT' == newItem.name) {
-            list.action.unshift(newItem)
-          }
-
-          countAction = list.action.length
-
-          if (countAction > 5) {
-            list.action.splice(-1, countAction - 1)
-          }
-
-          list.action.sort(function (a, b) {
-            return new Date('2012-06-08 ' + b.time).getTime() - new Date('2012-06-08 ' + a.time).getTime();
-          })
-
-          return list
-        })*/
       })
     },
     getTime(timestamp) {
