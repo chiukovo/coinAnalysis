@@ -14,3 +14,14 @@ export default {
   },
 }
 </script>
+
+<style>
+  #tlkio {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
+    border: 1px solid;
+    min-height: 300px;
+  }
+</style>
