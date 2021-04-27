@@ -17,6 +17,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
     script: [
+      { src: '/js/embed.js', type: 'text/javascript' },
       { src: '/js/reconnecting-websocket.min.js', type: 'text/javascript' },
       { src: '/js/tv.js', type: 'text/javascript' },
     ]
