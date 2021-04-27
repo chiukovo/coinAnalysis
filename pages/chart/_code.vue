@@ -1,6 +1,27 @@
 <template>
-  <main class="container mt-3 pb-3" :style="checkChartHeight()">
+  <main class="container pb-3" :style="checkChartHeight()">
     <div class="tradingview-widget-container w100">
+      <!-- <div class="row mb-3">
+        <div class="col">
+          <div class="market">
+            <div class="market-content">
+              <ul class="market-ticker-last">
+                <li>
+                  <div class="content">
+                    <div href="#" class="market-time">
+                      <span class="time">16:39:10
+                        <i class="dian"></i>
+                      </span>
+                    </div>
+                    <div class="detail">特大單賣出</div>
+                    <div class="number text-danger">21500 REN</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div> -->
       <div id="tradingview" class="w100"></div>
     </div>
   </main>

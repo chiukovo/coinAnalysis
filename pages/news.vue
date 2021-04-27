@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main class="container mt-3 pb-3">
+    <main class="container pb-3">
       <div class="bg-white shadow p-3 mb-5 bg-body rounded">
         <div class="page">
           <div class="page-content">

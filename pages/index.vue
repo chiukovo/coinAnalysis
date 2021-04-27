@@ -1,7 +1,7 @@
 <template>
   <div>
     <no-ssr>
-      <main class="container mt-3 pb-3">
+      <main class="container pb-3">
         <div class="bg-white shadow p-3 mb-5 bg-body rounded">
           <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="masonry-container row" style="position: relative; height: 1044px;">
             <div v-masonry-tile class="col-sm-6 col-lg-4 mb-4 item" v-for="list in pageList">

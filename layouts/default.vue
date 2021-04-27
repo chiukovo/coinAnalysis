@@ -1,6 +1,6 @@
 <template>
   <div class="w100">
-    <header class="shadow">
+    <header class="shadow fixed-top">
       <div class="bar">
         <div class="container px-4">
           <span>GMT+8</span>
