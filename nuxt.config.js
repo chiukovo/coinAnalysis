@@ -43,11 +43,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/google-analytics'
   ],
-  googleAnalytics: {
-    id: 'G-1Q4XGHYDN2'
-  },
   modules: [
     '@nuxtjs/dotenv',
     '@nuxtjs/axios',
