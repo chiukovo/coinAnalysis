@@ -18,6 +18,7 @@
     "nuxt-i18n": "^6.23.0",
     "nuxt-lazy-load": "^1.2.6",
     "vue-currency-filter": "^5.2.0",
+    "vue-infinite-loading": "^2.4.5",
     "vue-infinite-scroll": "^2.0.2",
     "vue-masonry": "^0.13.0",
     "vue-native-websocket": "^2.0.14",

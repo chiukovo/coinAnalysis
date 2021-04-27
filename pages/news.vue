@@ -29,6 +29,9 @@
                 </div>
               </li>
             </ul>
+            <no-ssr>
+              <infinite-loading></infinite-loading>
+            </no-ssr>
           </div>
         </div>
       </div>

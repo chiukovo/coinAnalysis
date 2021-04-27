@@ -41,7 +41,6 @@
         </div>
       </main>
     </no-ssr>
-
   </div>
 </template>
 

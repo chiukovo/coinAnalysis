@@ -32,6 +32,7 @@ export default {
     { src: '~plugins/global.js', ssr: false },
     { src: '~/plugins/vue-masonry', ssr: false },
     { src: '~plugins/vue-infinite-scroll.js', ssr: false },
+    { src: '~plugins/vue-infinite-loading.js', ssr: false },
     { src: '~plugins/vue-waterfall2.js', ssr: false }
   ],
 
