@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 body {
-  // font-family: 'Lato', "PingFangSC-Regular","PingFang SC","SF Pro SC","SF Pro Text","Microsoft Yahei","Helvetica Neue","Helvetica","Arial",sans-serif;
   font-family: PingFang SC,Hiragino Sans GB,Helvetica,Heiti SC,Microsoft YaHei,NotoSans Light,Malgun Gothic,"\B9D1\C740 \ACE0\B515",Apple SD Gothic Neo,\\B3CB\C6C0,dotum,sans-serif;
   font-size: 13px;
   line-height: 1.8;
@@ -12,7 +11,6 @@ body {
 }
 
 a {
-  // color: #5a627e;
   text-decoration: none;
 }
 
@@ -57,19 +55,6 @@ footer {
     color: #c0c3ce;
   }
 }
-
-// .nav-custom {
-//   font-size: .75rem;
-//   border-bottom: 1px solid #ededef;
-//   .nav-link {
-//     background: transparent;
-//     border: solid 2px transparent;
-//     &.active {
-//       border-bottom-color: #292929;
-//     }
-//   }
-// }
-
 .spinnerWarp {
   width: 100%;
   height: 100%;
@@ -88,6 +73,22 @@ footer {
     width: 100%;
     height: 100%;
     background: rgba(255,255,255,.88);
+  }
+}
+
+
+.market-wrap {
+  background-color: #fff;
+  padding: 20px;
+  [class*="col-"] {
+    margin-bottom: 20px;
+  }
+  @media screen and (max-width: 540px) {
+    background-color: transparent;
+    padding: 0;
+    [class*="col-"] {
+      margin-bottom: 10px;
+    }
   }
 }
 .market-ticker {
@@ -280,6 +281,8 @@ footer {
   }
 }
 .page {
+  background-color: #fff;
+  padding-top: 20px;
   .page-wrap {
     list-style: none;
     margin: 20px 0;
@@ -302,10 +305,10 @@ footer {
       font-weight: 600;
     }
     .newsfocus {
+      display: inline-block;
       background: #eef5ff;
       border: 1px solid #eaf3ff;
       border-radius: 2px;
-      height: 22px;
       color: #4798ff;
       padding: 4px 8px;
       margin-right: 6px;
@@ -373,8 +376,12 @@ footer {
       a {
         display: inline-block;
         padding: 10px;
+        white-space: nowrap;
       }
     }
+  }
+  @media screen and (min-width: 541px) {
+    padding: 20px;
   }
 }
 .page-list {
@@ -412,6 +419,12 @@ footer {
       font-weight: 300;
     }
   }
+  @media screen and (max-width: 767px) {
+    margin: 10px;
+    .page-info-wrap {
+      flex-direction: column;
+    }
+  }
 }
 .page-pagation {
   display: flex;
@@ -441,12 +454,24 @@ footer {
       max-height: 42px;
       overflow: hidden;
       padding-left: 0;
+      margin: 0;
     }
   }
   .page-pagation-back {
     flex: 1;
     text-align: center;
     margin: 0 1%;
+  }
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    .page-pagation-wrap {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .page-pagation-back {
+      order: 1;
+    }
   }
 }
 
@@ -470,7 +495,7 @@ footer {
     .gotop-arrow {
       width: 20px;
       height: 20px;
-      background: url('/_nuxt/assets/images/logo.svg');
+      background: url('~assets/images/up-arrow.svg');
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center center;
