@@ -36,6 +36,7 @@
       <p class="copyright">Copyright © 2021 幣幣 保留一切權利。</p>
       <p>免責聲明：幣幣動態作為開放的資訊分享平台，與幣幣動態平台立場無關，且不構成任何投資理財建議。</p>
     </footer>
+    <div id="chat"></div>
   </div>
 </template>
 
@@ -60,17 +61,16 @@ export default {
     gtag('js', new Date());
 
     gtag('config', 'G-1Q4XGHYDN2')
+
+    this.$nextTick(() => {
+      window.DeadSimpleChat.initBubble({
+        mode: "small",
+        roomId: "JaTWzh2FL",
+        open: false
+      })
+    })
   },
   updated() {
-    if (!this.chatStart) {
-      window.DeadSimpleChat.initBubble({
-          mode: "small",
-          roomId: "JaTWzh2FL",
-          open: false
-      })
-
-      this.chatStart = true
-    }
   },
   methods: {
     timeFormate(timeStamp) {
