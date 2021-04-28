@@ -5,7 +5,7 @@
         <div class="gotop-arrow"></div>
       </div>
     </div>-->
-    <header class="shadow fixed-top">
+    <header class="shadow fixed-top" style="z-index: 1">
       <div class="bar">
         <div class="container px-4">
           <span>GMT+8</span>
