@@ -5,7 +5,7 @@
         <div class="gotop-arrow"></div>
       </div>
     </div>-->
-    <header class="shadow fixed-top" style="z-index: 1">
+    <header class="shadow fixed-top" style="z-index: 1;">
       <div class="bar">
         <div class="container px-4">
           <span>GMT+8</span>
@@ -97,5 +97,9 @@ export default {
 html, body, #__nuxt, #__layout, .w100 {
   width: 100%;
   height: 100%;
+}
+
+#bubble {
+  z-index: 10;
 }
 </style>
