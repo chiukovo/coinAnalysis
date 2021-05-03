@@ -204,7 +204,7 @@ export default {
         newItem.type = _this.$t(type)
 
         if (item.volume != null) {
-          newItem.show = item.volume + ' ' + item.baseAsset
+          newItem.show = item.volume.toFixed(2) + ' ' + item.baseAsset
           newItem.icon_url = _this.getIconUrl(type, item.volume)
         }
 
