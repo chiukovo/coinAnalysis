@@ -182,18 +182,21 @@ footer {
   }
 }
 .market {
+  height: 250px;
   .market-ticker-last {
     list-style: none;
+    overflow-x: hidden;
+    margin: 0;
     li {
       position: relative;
       padding: 0 0 10px 10px;
-      margin-left: 40px;
+      margin-left: 60px;
       border-left: 1px solid #f2f2f2;
     }
     .time {
       position: absolute;
       top: 6px;
-      left: -40px;
+      left: -60px;
       font-size: 12px;
       color: #333;
       font-weight: 400;
@@ -203,7 +206,7 @@ footer {
         background: #dcdcdc;
         border-radius: 50%;
         position: absolute;
-        left: 37px;
+        left: 57px;
         top: 10px;
       }
     }
@@ -486,9 +489,10 @@ footer {
 .market {
   background-color: #fff;
   border: 1px solid #d9dadb;
+  overflow-x: auto;
   .market-wrap {
     list-style: none;
-    margin: 20px 0;
+    margin: 20px 0 0 0;
     padding: 0 20px 0 0;
     > li {
       position: relative;
@@ -533,6 +537,19 @@ footer {
         height: 16px;
         border-radius: 4px;
         margin-left: 10px;
+      }
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .market-ticker-title .name {
+      flex: 2 1 0%;
+    }
+  }
+  @media screen and (max-width: 541px) {
+    .market-ticker-title {
+      flex-direction: column;
+      .number {
+        justify-content: flex-start;
       }
     }
   }
