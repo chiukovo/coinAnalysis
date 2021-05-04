@@ -6,77 +6,20 @@
           <div class="market">
             <div class="market-wrap">
               <ul class="market-ticker-last">
-                <li>
+                <li v-for="action in tradingNotice">
                   <div class="content">
-                    <div class="market-ticker-title bg-danger-light">
-                      <div class="time">16:10
+                    <div class="market-ticker-title" :class="'bg-' + action.color + '-light'">
+                      <div class="time">{{ action.time }}
                         <i class="dian"></i>
                       </div>
-                      <div class="name">DOGE
+                      <div class="name">{{ code }}
                         <span>/USDT</span>
                       </div>
-                      <div class="detail">特大單賣出</div>
-                      <div class="number text-danger">
-                        <span>21500 REN</span>
-                        <i class="bg-danger">
-                          <img src="../../assets/images/icon_big.svg">
-                        </i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="content">
-                    <div class="market-ticker-title bg-danger-light">
-                      <div class="time">16:10
-                        <i class="dian"></i>
-                      </div>
-                      <div class="name">DOGE
-                        <span>/USDT</span>
-                      </div>
-                      <div class="detail">特大單賣出</div>
-                      <div class="number text-danger">
-                        <span>21500 REN</span>
-                        <i class="bg-danger">
-                          <img src="../../assets/images/icon_big.svg">
-                        </i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="content">
-                    <div class="market-ticker-title bg-success-light">
-                      <div class="time">16:10
-                        <i class="dian"></i>
-                      </div>
-                      <div class="name">DOGE
-                        <span>/USDT</span>
-                      </div>
-                      <div class="detail">特大單賣出</div>
-                      <div class="number text-success">
-                        <span>21500 REN</span>
-                        <i class="bg-success">
-                          <img src="../../assets/images/icon_big.svg">
-                        </i>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="content">
-                    <div class="market-ticker-title bg-success-light">
-                      <div class="time">16:10
-                        <i class="dian"></i>
-                      </div>
-                      <div class="name">DOGE
-                        <span>/USDT</span>
-                      </div>
-                      <div class="detail">特大單賣出</div>
-                      <div class="number text-success">
-                        <span>21500 REN</span>
-                        <i class="bg-success">
-                          <img src="../../assets/images/icon_big.svg">
+                      <div class="detail">{{ action.type }}</div>
+                      <div class="number" :class="'text-' + action.color">
+                        <span>{{ action.show }}</span>
+                        <i :class="'bg-' + action.color" v-if="action.icon_url != ''">
+                          <img :src="require(`~/assets/images/${action.icon_url}`)">
                         </i>
                       </div>
                     </div>
@@ -121,12 +64,11 @@ export default {
         _this.$store.state.socket.reconnecting = false
         location.reload()
       }
-
       let params = _this.code.toLowerCase()
-
       this.send('{"method":"SUBSCRIBE","params":["' + params + '@ticker"],"id":1}')
     }
 
+    
     this.$list.onmessage = function(msg) {
       /*{
         "e": "24hrTicker",  // 事件类型
@@ -154,24 +96,20 @@ export default {
         "n": 18151          // 24小时内成交数
       }*/
       let target = JSON.parse(msg.data)
-
       if (typeof target.data != 'undefined') {
         _this.base.priceChangePercent = target.data.P.replace(/0+$/, '')
         _this.base.lastPrice = target.data.c.replace(/0+$/, '')
-
         let lastPriceLength = _this.base.lastPrice.toString().split(".")[1].length
         
         if (lastPriceLength <= 1) {
           _this.base.lastPrice = parseFloat(_this.base.lastPrice).toFixed(2)
         }
-
         _this.base.highPrice = target.data.h.replace(/0+$/, '')
         _this.base.lowPrice = target.data.l.replace(/0+$/, '')
-
         _this.title = _this.base.lastPrice + ' | ' + _this.code + ' | ' + process.env.WEB_NAME
       }
     }
-
+    
     this.$list.onerror = function(e) {
       _this.$store.state.socket.reconnecting = true
       console.log('連線異常, 重新連線中...')
@@ -248,6 +186,10 @@ export default {
       let countAction
 
       source.forEach(function(item, i) {
+        if (_this.code != item.symbol) {
+          return true
+        }
+
         newItem = {}
         newItem.name = item.baseAsset + '/' + item.quotaAsset
 
@@ -264,7 +206,7 @@ export default {
         newItem.type = _this.$t(type)
 
         if (item.volume != null) {
-          newItem.show = item.volume + ' ' + item.baseAsset
+          newItem.show = item.volume.toFixed(2) + ' ' + item.baseAsset
           newItem.icon_url = _this.getIconUrl(type, item.volume)
         }
 
@@ -285,7 +227,17 @@ export default {
           newItem.time = _this.getTime(item.createTimestamp)
         }
           
-        result.push(newItem)
+        _this.tradingNotice.unshift(newItem)
+
+        countAction = _this.tradingNotice.length
+
+        if (countAction > 5) {
+          _this.tradingNotice.splice(-1, countAction - 1)
+        }
+
+        _this.tradingNotice.sort(function (a, b) {
+          return new Date('2012-06-08 ' + b.time).getTime() - new Date('2012-06-08 ' + a.time).getTime();
+        })
       })
     },
     getTime(timestamp) {
