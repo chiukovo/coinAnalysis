@@ -35,6 +35,7 @@ export default {
     { src: '~plugins/vue-infinite-scroll.js', ssr: false },
     { src: '~plugins/vue-infinite-loading.js', ssr: false },
     { src: '~plugins/v-calendar.js', ssr: false },
+    { src: '~plugins/vue-gtag.js', ssr: false },
     { src: '~plugins/vue-waterfall2.js', ssr: false }
   ],
 
@@ -43,11 +44,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/google-analytics'
   ],
-  googleAnalytics: {
-    id: 'G-1Q4XGHYDN2'
-  },
   modules: [
     '@nuxtjs/dotenv',
     '@nuxtjs/axios',

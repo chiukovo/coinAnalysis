@@ -109,7 +109,7 @@ export default {
         _this.title = _this.base.lastPrice + ' | ' + _this.code + ' | ' + process.env.WEB_NAME
       }
     }
-    
+
     this.$list.onerror = function(e) {
       _this.$store.state.socket.reconnecting = true
       console.log('連線異常, 重新連線中...')
@@ -231,7 +231,7 @@ export default {
 
         countAction = _this.tradingNotice.length
 
-        if (countAction > 5) {
+        if (countAction > 5000) {
           _this.tradingNotice.splice(-1, countAction - 1)
         }
 
