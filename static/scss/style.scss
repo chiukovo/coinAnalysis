@@ -1,6 +1,13 @@
 @import 'bootstrap/_bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+.bg-danger-light {
+  background-color: rgba($red, .04) !important;
+}
+.bg-success-light {
+  background-color: rgba($green, .06) !important;
+}
+
 body {
   font-family: PingFang SC,Hiragino Sans GB,Helvetica,Heiti SC,Microsoft YaHei,NotoSans Light,Malgun Gothic,"\B9D1\C740 \ACE0\B515",Apple SD Gothic Neo,\\B3CB\C6C0,dotum,sans-serif;
   font-size: 13px;
@@ -179,21 +186,21 @@ footer {
     list-style: none;
     li {
       position: relative;
-      padding: 0 0 40px 10px;
-      margin-left: 100px;
-      border-left: 1px solid red;
+      padding: 0 0 10px 10px;
+      margin-left: 40px;
+      border-left: 1px solid #f2f2f2;
     }
     .time {
       position: absolute;
-      top: 0;
-      left: -100px;
+      top: 6px;
+      left: -40px;
       font-size: 12px;
       color: #333;
       font-weight: 400;
       i.dian {
         width: 5px;
         height: 5px;
-        background: red;
+        background: #dcdcdc;
         border-radius: 50%;
         position: absolute;
         left: 37px;
@@ -475,6 +482,63 @@ footer {
     }
   }
 }
+
+.market {
+  background-color: #fff;
+  border: 1px solid #d9dadb;
+  .market-wrap {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0 20px 0 0;
+    > li {
+      position: relative;
+      padding: 0 0 40px 10px;
+      margin-left: 40px;
+      border-left: 1px solid #f2f2f2;
+      &:last-of-type {
+        border-left: none;
+        padding-top: 0;
+      }
+    }
+  }
+  .market-ticker-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+    background: #f3f6fc;
+    padding: 6px 30px;
+    .name {
+      display: flex;
+      flex: 1.5 1 0%;
+      min-width: 0px;
+      letter-spacing: 1px;
+      margin: 0px;
+      > span {
+        color: #949eae;
+      }
+    }
+    .number {
+      display: flex;
+      flex: 2 1 0%;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 0px;
+      margin: 0px;
+      i {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 22px;
+        height: 16px;
+        border-radius: 4px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+
 
 .gotop {
   position: fixed;

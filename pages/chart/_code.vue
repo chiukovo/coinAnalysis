@@ -1,27 +1,92 @@
 <template>
   <main class="container pb-3" :style="checkChartHeight()">
     <div class="tradingview-widget-container w100">
-      <!-- <div class="row mb-3">
+      <div class="row mb-3">
         <div class="col">
           <div class="market">
-            <div class="market-content">
+            <div class="market-wrap">
               <ul class="market-ticker-last">
                 <li>
                   <div class="content">
-                    <div href="#" class="market-time">
-                      <span class="time">16:39:10
+                    <div class="market-ticker-title bg-danger-light">
+                      <div class="time">16:10
                         <i class="dian"></i>
-                      </span>
+                      </div>
+                      <div class="name">DOGE
+                        <span>/USDT</span>
+                      </div>
+                      <div class="detail">特大單賣出</div>
+                      <div class="number text-danger">
+                        <span>21500 REN</span>
+                        <i class="bg-danger">
+                          <img src="../../assets/images/icon_big.svg">
+                        </i>
+                      </div>
                     </div>
-                    <div class="detail">特大單賣出</div>
-                    <div class="number text-danger">21500 REN</div>
+                  </div>
+                </li>
+                <li>
+                  <div class="content">
+                    <div class="market-ticker-title bg-danger-light">
+                      <div class="time">16:10
+                        <i class="dian"></i>
+                      </div>
+                      <div class="name">DOGE
+                        <span>/USDT</span>
+                      </div>
+                      <div class="detail">特大單賣出</div>
+                      <div class="number text-danger">
+                        <span>21500 REN</span>
+                        <i class="bg-danger">
+                          <img src="../../assets/images/icon_big.svg">
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="content">
+                    <div class="market-ticker-title bg-success-light">
+                      <div class="time">16:10
+                        <i class="dian"></i>
+                      </div>
+                      <div class="name">DOGE
+                        <span>/USDT</span>
+                      </div>
+                      <div class="detail">特大單賣出</div>
+                      <div class="number text-success">
+                        <span>21500 REN</span>
+                        <i class="bg-success">
+                          <img src="../../assets/images/icon_big.svg">
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="content">
+                    <div class="market-ticker-title bg-success-light">
+                      <div class="time">16:10
+                        <i class="dian"></i>
+                      </div>
+                      <div class="name">DOGE
+                        <span>/USDT</span>
+                      </div>
+                      <div class="detail">特大單賣出</div>
+                      <div class="number text-success">
+                        <span>21500 REN</span>
+                        <i class="bg-success">
+                          <img src="../../assets/images/icon_big.svg">
+                        </i>
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <div id="tradingview" class="w100"></div>
     </div>
   </main>

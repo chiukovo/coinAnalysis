@@ -4,7 +4,7 @@
       <main class="container pb-3">
         <div class="market-wrap shadow rounded">
           <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" class="masonry-container row">
-            <div v-masonry-tile class="col-sm-6 col-lg-4 mb-4 item" v-for="list in pageList">
+            <div v-masonry-tile class="col-sm-6 col-lg-4 item" v-for="list in pageList">
               <div class="card market-ticker" @click="goChart(list)">
                 <div class="card-body">
                   <div class="card-title">
