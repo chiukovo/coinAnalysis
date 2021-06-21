@@ -20,6 +20,11 @@ export default {
       { src: '/js/embed.js', type: 'text/javascript' },
       { src: '/js/reconnecting-websocket.min.js', type: 'text/javascript' },
       { src: '/js/tv.js', type: 'text/javascript' },
+      {
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+        'data-ad-client': 'ca-pub-2560043137442562',
+        async: true
+      }
     ]
   },
   loading: '~/components/LoadingBar.vue',
