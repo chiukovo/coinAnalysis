@@ -41,6 +41,7 @@
 </template>
 
 <script>
+<script data-ad-client="ca-pub-2560043137442562" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 export default {
   data() {
     return  {
